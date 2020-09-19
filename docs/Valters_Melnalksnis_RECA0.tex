@@ -1,0 +1,204 @@
+%Based on RTU EEF guidelines for bachelor thesis
+%https://www.rtu.lv/writable/public_files/RTU_025.pdf
+%Modified for smaller tasks
+
+\documentclass[12pt,fleqn,titlepage,oneside]{article}
+
+%Page margins according to guidelines
+\usepackage[a4paper,top=30mm,right=15mm,bottom=30mm,left=35mm]{geometry}
+%Indent first paragraph after section header
+\usepackage{indentfirst}
+%Set space between lines (1, 1.5, 2)
+\usepackage{setspace}
+%Set paragraph first line indent according to guidelines
+\setlength{\parindent}{15mm}
+
+%Select alternative section titles
+\usepackage{titlesec}
+%Double line spacing after section title
+\titlespacing*{\section}
+	{0pt}{\baselineskip}{2\baselineskip}
+%Normal spacing around subsection title
+\titlespacing*{\subsection}
+	{0pt}{\baselineskip}{\baselineskip}
+
+%Change enumerate number formatting
+\usepackage{enumitem}
+%More enumeration options
+\usepackage{moreenum}
+
+%Set table of contents depth to subsections
+\setcounter{tocdepth}{2}
+%Control table of contents, figures, etc
+\usepackage{tocloft}
+%Add " lpp." after section page number in table of contents
+\renewcommand{\cftsecafterpnum}{\textbf{ lpp.}}
+%Add " lpp." after subsection page number in table of contents
+\renewcommand{\cftsubsecafterpnum}{ lpp.}
+
+%Improved interface for floating objects
+\usepackage{float}
+%Support for sub-captions
+\usepackage{subcaption}
+%Produces figures which text can flow around
+\usepackage{wrapfig}
+%Control float placement with \FloatBarrier
+\usepackage{placeins}
+
+%AMS mathematical facilities for LaTeX
+\usepackage{amsmath}
+%Mathematical tools to use with amsmath
+\usepackage{mathtools}
+%Typeset physical units following the rules of the International System of Units (SI)
+\usepackage{SIunits}
+%Code formatting
+\usepackage{listings}
+
+%Tabulars with adjustable-width columns
+\usepackage{tabularx}
+%Driver-independent color extensions for LaTeX and pdfLaTeX
+\usepackage{xcolor}
+%Enhanced support for graphics (\includegraphics)
+\usepackage{graphicx}
+
+%Create PostScript and PDF graphics in TeX
+\usepackage{tikz}
+%Draw electrical networks with TikZ
+\usepackage[EFvoltages]{circuitikz}
+%Easy generation of timing diagrams as TikZ pictures
+\usepackage{tikz-timing}
+%Create normal/logarithmic plots in two and three dimensions
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+
+%Accept different input encodings
+\usepackage[utf8]{inputenc}
+
+%Add section number to equations, figures and tables
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+
+%Set caption label names according to guidelines
+\renewcommand{\contentsname}{Saturs}
+\renewcommand{\figurename}{att.}
+\renewcommand{\tablename}{tabula}
+%Set caption label format according to guidelines
+\DeclareCaptionLabelFormat{tableLabelFormat}{#2 #1}
+\DeclareCaptionLabelFormat{figureLabelFormat}{#2 #1}
+\DeclareCaptionLabelSeparator{figureLabelSeperator}{ }
+\DeclareCaptionFormat{mine}{\raggedleft #1\\\centering #3}%
+\captionsetup[table]{labelformat=tableLabelFormat, singlelinecheck=off, format=mine}
+\captionsetup[figure]{labelsep=figureLabelSeperator, labelformat=figureLabelFormat}
+
+%Used for drawing a dashed vertical line from a point to the x axis in pgfplots
+\newcommand{\vertLineFromPoint}[1]{
+  \draw[dashed] 
+  (#1) -- (#1|-{rel axis cs:0,0})
+}
+%Used for drawing a dashed horizontal line  from a point to the y axis in pgfplots
+\newcommand{\horLineFromPoint}[1]{
+  \draw[dashed] 
+  (#1) -- (#1-|{rel axis cs:0,0})
+}
+
+%Variables used in the document
+\newcommand{\authorName}{Valters Melnalksnis}
+\newcommand{\authorId}{161REC035}
+
+\usepackage{hyperref}
+\hypersetup{
+	bookmarks=true,
+	unicode=true,
+	hidelinks
+}
+%Split document in multiple files
+\usepackage{subfiles}
+
+
+\usetikzlibrary{external}
+\tikzset{external/optimize=false}
+\usepgfplotslibrary{external}
+\tikzexternalize
+
+\begin{document}
+\begin{titlepage}
+	\centering
+	\doublespacing
+	{\Large \textbf{Rīgas Tehniskā Universitāte}}
+	
+	{Elektrotehnikas un vides inženierzinātņu fakultāte\\}
+	{Industriālās elektronikas un elektrotehnikas institūts\\}
+	{Industriālās elektronikas un elektrotehnoloģiju katedra\par}
+	\vspace{2cm}
+	
+	\onehalfspacing
+	{\Large \textbf{\authorName}\\}
+	Profesionālā bakalaura adaptronikas studiju programmas students,\\
+	stud. apl. nr. \authorId
+	\vspace{2cm}
+	
+	{\huge 18650 tipa bateriju elementu ietilpības pētīšanas iekārtas izpēte un izstrāde\par}
+	
+	\doublespacing
+	{\Large Bakalaura darbs ar projekta daļu\par}
+	\onehalfspacing
+	\vspace{6cm}
+	
+	\raggedleft
+	Zinātniskais vadītājs\\
+	RTU IEEI pētnieks\\
+	Kristaps Vītols
+	
+	\centering
+	\vfill
+	Rīga, \the\year
+\end{titlepage}
+
+\onehalfspacing
+\FloatBarrier
+\newpage
+\setcounter{page}{2}
+\section*{\MakeUppercase{Anotācija}}
+
+\newpage
+
+\section*{\MakeUppercase{Abstract}}
+
+\newpage
+
+\doublespacing
+\tableofcontents
+\onehalfspacing
+\newpage
+
+\addcontentsline{toc}{section}{\texorpdfstring{\MakeUppercase{Ievads}}{Ievads}}
+\section*{\texorpdfstring{\MakeUppercase{Ievads}}{Ievads}}
+
+\FloatBarrier
+\newpage
+\section{\texorpdfstring{\MakeUppercase{Teorijas izpēte}}{Teorijas izpēte}}
+
+\subsection{Baterijas}
+
+\subsection{Līdzīgas iekārtas}
+
+\FloatBarrier
+\newpage
+\section{\texorpdfstring{\MakeUppercase{Sistēmas analīze/apraksts}}{Sistēmas analīze/apraksts}}
+
+\subsection{Izlādes modulis}
+
+\subsection{Uzlādes modulis}
+
+\subsection{Vadības modulis}
+
+\FloatBarrier
+\newpage
+\section{\texorpdfstring{\MakeUppercase{Secinājumi}}{Secinājumi}}
+
+\FloatBarrier
+\newpage
+\section{\texorpdfstring{\MakeUppercase{Izmantotā literatūra}}{Izmantotā literatūra}}
+
+\end{document}
