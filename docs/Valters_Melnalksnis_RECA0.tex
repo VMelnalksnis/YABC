@@ -106,12 +106,20 @@
 \newcommand{\authorName}{Valters Melnalksnis}
 \newcommand{\authorId}{161REC035}
 
+\usepackage[language=latvian]{biblatex}
+\BiblatexLatvianWarningOff
+\addbibresource{bibliography.bib}
+
+\usepackage{url}
+%PDF hyperlinks, navigation, etc.
 \usepackage{hyperref}
 \hypersetup{
+	breaklinks=true,
 	bookmarks=true,
 	unicode=true,
 	hidelinks
 }
+
 %Split document in multiple files
 \usepackage{subfiles}
 
@@ -186,7 +194,7 @@ Parasti negatīvais elektrods tiek izgatavots no oglekļa, bet pozitīvais - met
 Elektrolīts ir litija sāls organiskā šķidinātājā.
 
 18650 (vai arī 168A) šūnu tipiskā ietilpība ir no 1500 līdz 3500 $mAH$, nominālais spriegums 3.7 $V$,
-diametrs 18 $mm$ un garums 65 $mm$.
+diametrs 18 $mm$ un garums 65 $mm$.\cite{18650cell}
 Lai gan fiziskie izmēri ir standartizēti, šūnām ar izvirzītu pozitīvo termināli var atšķirties izvirzījuma izmēri,
 līdz ar to tās var būt nesaderīgas ar ierīcēm.
 
@@ -218,6 +226,10 @@ jo tās var uzlādēties dažādos ātrumos atšķirīgu iekšējo pretestību d
 
 \FloatBarrier
 \newpage
-\section{\texorpdfstring{\MakeUppercase{Izmantotā literatūra}}{Izmantotā literatūra}}
+
+\printbibliography[
+	heading=bibintoc,
+	title=\texorpdfstring{\MakeUppercase{Izmantotā literatūra}}{Izmantotā literatūra}
+]
 
 \end{document}
