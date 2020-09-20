@@ -15,7 +15,7 @@ jobs:
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v2
         with:
-          root_file: docs/Valters_Melnalksnis_RECA0.tex
+          root_file: docs/thesis/Valters_Melnalksnis_RECA0.tex
           latexmk_shell_escape: true
 
       - name: Bump version
@@ -26,7 +26,7 @@ jobs:
           tag_prefix: "v"
           major_pattern: "(MAJOR-THESIS)"
           minor_pattern: "(MINOR-THESIS)"
-          change_path: "docs"
+          change_path: "docs/thesis"
           namespace: thesis
           
       - name: Create Release

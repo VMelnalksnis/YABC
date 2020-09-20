@@ -56,7 +56,7 @@ eagle.epf
 *.lck
 
 ### docs ###
-**/docs/*.pdf
+**/thesis/*.pdf
 
 ### LaTeX ###
 ## Core latex/pdflatex auxiliary files:
