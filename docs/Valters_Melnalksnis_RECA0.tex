@@ -106,12 +106,13 @@
 \newcommand{\authorName}{Valters Melnalksnis}
 \newcommand{\authorId}{161REC035}
 
+%Bibliography
 \usepackage[language=latvian]{biblatex}
 \BiblatexLatvianWarningOff
 \addbibresource{bibliography.bib}
 
-\usepackage{url}
 %PDF hyperlinks, navigation, etc.
+\usepackage{url}
 \usepackage{hyperref}
 \hypersetup{
 	breaklinks=true,
@@ -123,7 +124,7 @@
 %Split document in multiple files
 \usepackage{subfiles}
 
-
+%Render to external files to minimize compile time
 \usetikzlibrary{external}
 \tikzset{external/optimize=false}
 \usepgfplotslibrary{external}
