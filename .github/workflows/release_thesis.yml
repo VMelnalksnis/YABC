@@ -15,7 +15,8 @@ jobs:
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v2
         with:
-          root_file: docs/thesis/Valters_Melnalksnis_RECA0.tex
+          working_directory: docs/thesis/
+          root_file: Valters_Melnalksnis_RECA0.tex
           latexmk_shell_escape: true
 
       - name: Bump version
@@ -49,6 +50,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: Valters_Melnalksnis_RECA0.pdf
+          asset_path: docs/thesis/Valters_Melnalksnis_RECA0.pdf
           asset_name: Valters_Melnalksnis_RECA0.pdf
           asset_content_type: application/pdf
