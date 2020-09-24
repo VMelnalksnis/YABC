@@ -210,15 +210,72 @@ jo tās var uzlādēties dažādos ātrumos atšķirīgu iekšējo pretestību d
 
 \subsubsection{Izlāde}
 
+
 \subsection{Līdzīgas iekārtas}
 
-\FloatBarrier
-\newpage
+
+\subsubsection{SkyRC}
+
+Spēj izlādēt 2-8 virknē slēgtas LiPo/LiFe/LiHv šūnas, 6-23 NiMH/NiCD šūnas vai 6-32V Pb baterijas.
+Ir konstantas strāvas un jaudas režīmi, USB savienojums ar Windows programmatūru.
+
+\begingroup
+\renewcommand{\arraystretch}{1.25}
+\begin{table}[h]
+	\caption{SkyRc bateriju izlādes sitēmu parametri} 	
+	\label{tab:skyrcdischarge}
+	\centering
+	\begin{tabularx}{\linewidth}{ 
+		>{\setlength\hsize{1\hsize}\centering}X| 
+		>{\setlength\hsize{0.3\hsize}\centering}X| 
+		>{\setlength\hsize{0.3\hsize}\centering}X| 
+		>{\setlength\hsize{0.3\hsize}\centering}X}
+		Parametrs								& Mērvienība	& BD200\cite{bd200}		& BD250\cite{bd250}	\tabularnewline
+		\hline
+		Min. Spriegums                        	& $V$     		& $5.40$				& $5.40$ 			\tabularnewline
+		Max. Spriegums                        	& $V$     		& $35.00$				& $35.00$			\tabularnewline
+		Max. Jauda                            	& $W$     		& $200$					& $250$				\tabularnewline
+		Max. Strāva                           	& $A$     		& $30$					& $35$				\tabularnewline
+		Precizitāte, strāva $< 10A$           	& $\pm mA$		& $60$					& $60$				\tabularnewline
+		Precizitāte, strāva $> 10A$           	& $\pm\%$ 		& $2$					& $3$				\tabularnewline
+		Precizitāte, spriegums $< 10V$        	& $\pm mV$		& $60$					& $80$				\tabularnewline
+		Precizitāte, $10V <$ spriegums $< 20V$	& $\pm mV$		& $120$					& $120$				\tabularnewline
+		Precizitāte, spriegums $> 20V$        	& $\pm mV$		& $160$					& $160$	
+	\end{tabularx}
+\end{table}
+\endgroup
+
+\clearpage
 \section{\texorpdfstring{\MakeUppercase{Izstrādājamās sistēmas analīze}}{Izstrādājamās sistēmas analīze}}
+
+Spriegums $4.50 \pm 0.01$
+
+Strāva $20.0 \pm 0.2$
 
 \subsection{Izlādes modulis}
 
+Paramteri:
+\begin{itemize}
+	\item Sākuma spriegums līdz 4.35 $V$
+	\item Iestādāms beigu spriegums diapazonā 2.5 - 4.35 $V$
+	\item Maksimālā izlādes strāva 20 $A$
+	\item Maksimālā izkliedējamā jauda 80 $W$
+	\item Sprieguma precizitāte (?) %TODO
+	\item Strāvas precizitāte (?) %TODO
+	\item Temperatūras sensors (?) %TODO
+	\item Komunikācijas interfeiss (?) %TODO
+\end{itemize}
 \subsection{Uzlādes modulis}
+
+Parametri:
+\begin{itemize}
+	\item Iestādāma maksimālā uzlādes strāva līdz 3.5 $A$ (?) %TODO 3.5Ah @ 1C max?
+	\item Iestādāms maksimālais spriegums līdz 4.35 $V$
+	\item Sprieguma precizitāte (?) %TODO
+	\item Strāvas precizitāte (?) %TODO
+	\item Temperatūras sensors (?) %TODO
+	\item Komunikācijas interfeiss (?) %TODO
+\end{itemize}
 
 \subsection{Vadības modulis}
 
