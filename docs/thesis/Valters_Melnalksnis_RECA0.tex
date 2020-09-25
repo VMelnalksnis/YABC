@@ -123,7 +123,7 @@
 %Split document in multiple files
 \usepackage{subfiles}
 
-%Render to external files to minimize compile time
+%Render to external, files to minimize compile time
 \usetikzlibrary{external}
 \tikzset{external/optimize=false}
 \usepgfplotslibrary{external}
@@ -191,9 +191,25 @@
 
 \subsection{Baterijas}
 
-Trīs funkcionālās litija jonu bateriju sastāvdaļas ir elektrolīts un pozitīvais un negatīvais elektrods.
-Parasti negatīvais elektrods tiek izgatavots no oglekļa, bet pozitīvais - metāla oksīda.
-Elektrolīts ir litija sāls organiskā šķidinātājā.
+Baterija ir viena vai vairākas virknē slēgtas elektroķīmiskās šūnas.
+Baterijas galvenokārt var iedalīt divās grupās - primārajās un sekundārajās.
+Primārās jeb vienreizējās lietošanas baterijas var tikt izmantotas (izlādētas) tikai vienu reizi, jo izlādes gaitā elektrods tiek neatrgiežami bojāts.
+Savukārt sekundārās jeb uzlādējamās baterijas pēc izlādes ir iespējams vairākkārt uzlādēt pievienojot ārēju barošanas avotu.
+Primārajām baterijās parasti ir lielāka specifiskā enerģija, savukārt sekundārajām ir lielāka maksimālā izlādes strāva.
+
+Galvenie bateriju parametri:
+\begin{itemize}
+	\item Elektrolīta veids
+	\item Elektrodu veids
+	\item Nominālais, maksimālais un minimālais spriegums
+	\item Maksimālā uzlādes/izlādes strāva
+	\item Pašizlādes ātrums
+	\item Iekšējā presetība
+	\item Ietilpība ampērstundās $(Ah)$
+	\item C-reitings jeb maksimālā strāva kā koeficients no ampēriem no ietilpības ampērstundās
+\end{itemize}
+
+\subsection{18650 šūnas}
 
 18650 (vai arī 168A) šūnu tipiskā ietilpība ir no 1500 līdz 3500 $mAH$, nominālais spriegums 3.7 $V$,
 diametrs 18 $mm$ un garums 65 $mm$.\cite{18650cell}
@@ -210,9 +226,13 @@ jo tās var uzlādēties dažādos ātrumos atšķirīgu iekšējo pretestību d
 
 \subsubsection{Izlāde}
 
-
 \subsection{Līdzīgas iekārtas}
 
+\subsubsection{Eagle Eye}
+
+\subsubsection{PEC ACT0505}
+
+ACT0505 
 
 \subsubsection{SkyRC}
 
@@ -245,39 +265,41 @@ Ir konstantas strāvas un jaudas režīmi, USB savienojums ar Windows programmat
 \end{table}
 \endgroup
 
+\subsubsection{Amperis}
+
+\subsubsection{RCDischarger}
+
+\subsubsection{SBSBattery}
+
 \clearpage
 \section{\texorpdfstring{\MakeUppercase{Izstrādājamās sistēmas analīze}}{Izstrādājamās sistēmas analīze}}
 
-Spriegums $4.50 \pm 0.01$
+\subsection{Mērīšanas modulis}
 
-Strāva $20.0 \pm 0.2$
+Sprieguma diapazons $0.00-4.50\pm0.01 V$, strāvas diapazons $0.00-10.00\pm0.05 A$. Temperatūras sensors ar diapazonu $0.0-100.0\degree $. 
+Datu nolasīšana izmantojot I2C interfeisu.
+Barošanas spriegums $+12VDC$ un $+5VDC$. 
+Ar relejiem spēj atslēgs izlādes un uzlādes moduļus no šūnas.
 
 \subsection{Izlādes modulis}
 
-Paramteri:
-\begin{itemize}
-	\item Sākuma spriegums līdz 4.35 $V$
-	\item Iestādāms beigu spriegums diapazonā 2.5 - 4.35 $V$
-	\item Maksimālā izlādes strāva 20 $A$
-	\item Maksimālā izkliedējamā jauda 80 $W$
-	\item Sprieguma precizitāte (?) %TODO
-	\item Strāvas precizitāte (?) %TODO
-	\item Temperatūras sensors (?) %TODO
-	\item Komunikācijas interfeiss (?) %TODO
-\end{itemize}
+Sākuma spriegums līdz $4.35V$, iestādāms beigu spriegums $2.50-4.35 V$.
+Maksimālā izlādes strāva $20(10) A$, jauda $80(40) W$.
+Sprieguma, strāvas un temperatūras vērtības tiks nolasītas no mērīšanas moduļa. 
+
 \subsection{Uzlādes modulis}
+
+Ieteicams izmantot IC. Vienas šūnas uzlādes IC ir paradzēti uzlādei no USB, tāpēc ieejas spriegums ir $+5VDC$. USB PD standartiem atbilstoši lādētājiem ir arī ieejas līdz $+22VDC$, bet tam nepieciešama papildu konfigurācija izmantojot USB D+/D-, I2C vai rezistorus.
 
 Parametri:
 \begin{itemize}
 	\item Iestādāma maksimālā uzlādes strāva līdz 3.5 $A$ (?) %TODO 3.5Ah @ 1C max?
-	\item Iestādāms maksimālais spriegums līdz 4.35 $V$
-	\item Sprieguma precizitāte (?) %TODO
-	\item Strāvas precizitāte (?) %TODO
-	\item Temperatūras sensors (?) %TODO
-	\item Komunikācijas interfeiss (?) %TODO
+	\item Iestādāms maksimālais spriegums līdz $4.35 V$
 \end{itemize}
 
 \subsection{Vadības modulis}
+
+Vad
 
 \FloatBarrier
 \newpage
