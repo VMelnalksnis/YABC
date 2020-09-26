@@ -62,6 +62,7 @@
 
 %Create PostScript and PDF graphics in TeX
 \usepackage{tikz}
+\usetikzlibrary{positioning,fit}
 %Draw electrical networks with TikZ
 \usepackage[EFvoltages]{circuitikz}
 %Easy generation of timing diagrams as TikZ pictures
@@ -100,6 +101,8 @@
   \draw[dashed] 
   (#1) -- (#1-|{rel axis cs:0,0})
 }
+
+\tikzstyle{block} = [draw, fill=white, rectangle, minimum height=3em, minimum width=6em]
 
 %Variables used in the document
 \newcommand{\authorName}{Valters Melnalksnis}
@@ -273,6 +276,45 @@ Ir konstantas strāvas un jaudas režīmi, USB savienojums ar Windows programmat
 
 \clearpage
 \section{\texorpdfstring{\MakeUppercase{Izstrādājamās sistēmas analīze}}{Izstrādājamās sistēmas analīze}}
+
+Šunu testēšanas sistēma sastāvēs no viena vadības moduļa un vairākiem testēšanas moduļiem.
+Vadības moduļa galvenās funckijas būs testa datu uzkrāšana un katras šūnas testa procesa vadība.
+Savukārt testēšanas modulis sastāves no mērīšanas, uzlādes un izlādes moduļiem. Mērīšanas moduļi mērīs baterijas parametrus (spriegumu, strāvu un temperatūru), kā arī pieslēgs vai atvienos uzlādes un izlādes moduļus no baterijas.
+Vadības modulis komunicēs ar mērīšanas moduļiem, kuri savukārt komunicēs ar attiecīgajiem uzlādes un izlādes moduļiem. 
+
+% Vai šim paragrāfam jābūt pie teorijas vai prakses?
+Testēšanas moduļi tiks slēgti paralēli, līdz ar to to skaitu ierobežos tikai izvēlētais komunikācijas protokols un tā ātrums.
+Divi iespējamie komunikācijas protokoli ir I\textsuperscript{2}C (Inter-Integrated Circuit) un SPI (Serial Peripheral Interface) daisy-chain konfigurācijā.
+I\textsuperscript{2}C komunikācija notiek starp vienu master un vienu slave ierīci master ierīcei norādot slave ierīces adresi.
+I\textsuperscript{2}C nepieciešami tikai divi savienojumi (SCL un SDA), taču maksimālais komunikācijas ātrums ir ierobežots.
+SPI daisy-chain konfigurācijā komunikācija notiek bīdot informāciju caur visām virknē slēgtajās ierīcēm. Salīdzīnājumā ar I\textsuperscript{2}C, SPI nepieciešami trīs savienojumi (SCK, MOSI, MISO), taču maksimālais komunikācijas ātrums ir daudzreiz lielāks nekā I\textsuperscript{2}C.
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+		\node [block] (controller) {Vadības modulis};
+		
+		\node [block, right=of controller] (mea1) {Mērīšanas modulis};
+		\node [block, right=of mea1] (bat1) {Testējamā šūna};
+		\node [block, below=of bat1] (disc1) {Izlādes modulis};
+		\node [block, above=of bat1] (charge1) {Uzlādes modulis};
+				
+		\draw [<->] (controller.east) -- (mea1.west);
+		\draw [<-] (mea1.east) -- (bat1.west);
+		\draw [->] (mea1.north) |- (charge1.west);
+		\draw [<->] (mea1.south) |- (disc1.west);
+		\draw [->] (bat1.south) -- (disc1.north);
+		\draw [<-] (bat1.north) -- (charge1.south);
+		
+		\node [
+			draw=black, 
+			dashed, 
+			inner sep=1em, 
+			fit= (mea1) (bat1) (disc1) (charge1)] (cont1) {};
+		\node [yshift=-1em] at (cont1.south) {Testēšanas modulis};
+	\end{tikzpicture}
+	\caption{Kopējas sistēmas blokshēma}
+\end{figure}
 
 \subsection{Mērīšanas modulis}
 
