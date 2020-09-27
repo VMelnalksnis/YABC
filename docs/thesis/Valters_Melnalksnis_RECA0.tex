@@ -59,10 +59,13 @@
 \usepackage{xcolor}
 %Enhanced support for graphics (\includegraphics)
 \usepackage{graphicx}
+\usepackage{multirow}
+
+\usepackage{chemformula}
 
 %Create PostScript and PDF graphics in TeX
 \usepackage{tikz}
-\usetikzlibrary{positioning,fit}
+\usetikzlibrary{positioning,fit,shapes.geometric}
 %Draw electrical networks with TikZ
 \usepackage[EFvoltages]{circuitikz}
 %Easy generation of timing diagrams as TikZ pictures
@@ -80,7 +83,8 @@
 \numberwithin{table}{section}
 
 %Set caption label names according to guidelines
-\renewcommand{\contentsname}{Saturs}
+\renewcommand{\contentsname}{\hfill\bfseries\Large Saturs\hfill}   
+\renewcommand{\cftaftertoctitle}{\hfill}
 \renewcommand{\figurename}{att.}
 \renewcommand{\tablename}{tabula}
 %Set caption label format according to guidelines
@@ -102,7 +106,8 @@
   (#1) -- (#1-|{rel axis cs:0,0})
 }
 
-\tikzstyle{block} = [draw, fill=white, rectangle, minimum height=3em, minimum width=6em]
+\tikzstyle{block} = [draw, rectangle, minimum height=3em, minimum width=6em]
+\tikzstyle{io} = [trapezium, trapezium stretches, trapezium left angle=70, trapezium right angle=110, minimum height=3em, text centered, draw=black]
 
 %Variables used in the document
 \newcommand{\authorName}{Valters Melnalksnis}
@@ -136,6 +141,21 @@
 \begin{titlepage}
 	\centering
 	\doublespacing
+	
+	{\Large\MakeUppercase{\textbf{Rīgas Tehniskā Universitāte}}\par}
+	
+	\vspace*{\fill}
+	
+	{\Huge\MakeUppercase{\textbf{Bakalaura darbs ar projekta daļu}}\par}
+	
+	\vspace*{\fill}
+	
+	{\Large Rīga, \the\year}
+\end{titlepage}
+
+\begin{titlepage}
+	\centering
+	\doublespacing
 	{\Large \textbf{Rīgas Tehniskā Universitāte}}
 	
 	{Elektrotehnikas un vides inženierzinātņu fakultāte\\}
@@ -149,27 +169,42 @@
 	stud. apl. nr. \authorId
 	\vspace{2cm}
 	
-	{\huge 18650 tipa bateriju elementu ietilpības pētīšanas iekārtas izpēte un izstrāde\par}
+	{\huge \textbf{18650 tipa bateriju elementu ietilpības pētīšanas iekārtas izpēte un izstrāde}\par}
 	
 	\doublespacing
-	{\Large Bakalaura darbs ar projekta daļu\par}
+	{\Large\textbf{Bakalaura darbs ar projekta daļu}\par}
 	\onehalfspacing
 	\vspace{6cm}
 	
 	\raggedleft
 	Zinātniskais vadītājs\\
 	RTU IEEI pētnieks\\
-	Kristaps Vītols
+	\doublespacing
+	{\Large Kristaps Vītols}
 	
 	\centering
 	\vfill
 	Rīga, \the\year
 \end{titlepage}
 
+\begin{titlepage}
+	\centering
+	\vspace*{\fill}
+	{\Large\textbf{Vieta darba uzdevumam}}
+	\vspace*{\fill}
+\end{titlepage}
+
+\begin{titlepage}
+	\centering
+	\vspace*{\fill}
+	{\Large\centering\textbf{Vieta komisijas lapai}}
+	\vspace*{\fill}
+\end{titlepage}
+
 \onehalfspacing
 \FloatBarrier
 \newpage
-\setcounter{page}{2}
+\setcounter{page}{4} %Manually set page counter because titlepage resets it
 \section*{\MakeUppercase{Anotācija}}
 
 \newpage
@@ -177,22 +212,15 @@
 \section*{\MakeUppercase{Abstract}}
 
 \newpage
-
-\doublespacing
 \tableofcontents
-\onehalfspacing
-\newpage
 
+\newpage
 \addcontentsline{toc}{section}{\texorpdfstring{\MakeUppercase{Ievads}}{Ievads}}
 \section*{\texorpdfstring{\MakeUppercase{Ievads}}{Ievads}}
 
 \FloatBarrier
 \newpage
-
-%TODO Nosaukums ???
-\section{\texorpdfstring{\MakeUppercase{Teorijas izpēte}}{Teorijas izpēte}}
-
-\subsection{Baterijas}
+\section{\texorpdfstring{\MakeUppercase{Baterijas}}{Baterijas}}
 
 Baterija ir viena vai vairākas virknē slēgtas elektroķīmiskās šūnas.
 Baterijas galvenokārt var iedalīt divās grupās - primārajās un sekundārajās.
@@ -209,8 +237,27 @@ Galvenie bateriju parametri:
 	\item Pašizlādes ātrums
 	\item Iekšējā presetība
 	\item Ietilpība ampērstundās $(Ah)$
-	\item C-reitings jeb maksimālā strāva kā koeficients no ampēriem no ietilpības ampērstundās
+	\item C-reitings jeb maksimālā strāva kā koeficients no ampēriem\\ no ietilpības ampērstundās
 \end{itemize}
+
+\subsection{Litija jonu baterijas}
+
+Litija jonu baterijas trīs galvenie funckionālie elementi ir pozitīvas un negatīvais elektrods un elektrolīts. 
+Parasti negatīvais elektrods tiek izgatavots no grafīta, pozitīvais elektrods no metāla oksīda, bet elektrolīts no litija sāls šķīduma organiskā šķīdinātājā.
+Šo bateriju galvenās īpašības ir augsts enerģijas blīvums ($250-693Wh/L$), lēna pašizlāde un atmiņas efekta neesamība.
+
+Litija jonu baterijās elektroķīmiskās reakcijas reaktanti ir anoda un katoda materiāli, kuri abi ir litija atomus saturošas vielas.
+Izlādes laikā anoda oksidācijas reakcijas rezultātā rodas pozitīvi lādēti litija joni, negatīvi lādēti elektroni un neitrāls anoda pārpalikums;
+joniem pārvietojoties caur elektrolītu un elektroniem caur ārēju shēmu, tie nonāk katodā kur notiek redukcijas reakcija ar katoda materiālu.
+Vienādojumā \ref{eq:libcharge} redzama litija kobalta oksīda katoda pus-reakcija, bet \ref{eq:libdischarge} grafīta anoda pus-reakcija.
+Kopējā šādas konstrukcijas baterijas reakcija attēlota \ref{eq:libchargecycle}, kur no kreisās uz labo pusi attēlota izlāde, bet pretējā virzienā - uzlāde.
+\begin{align}
+	\ch{CoO2 + Li+ + e- &<=> LiCoO2}		\label{eq:libcharge} \\
+	\ch{LiC6 &<=> C6 + Li+ + e-}			\label{eq:libdischarge} \\
+	\ch{LiC6 + CoO2 &<=> C6 + LiCoO2}	\label{eq:libchargecycle}
+\end{align}
+
+
 
 \subsection{18650 šūnas}
 
@@ -219,23 +266,23 @@ diametrs 18 $mm$ un garums 65 $mm$.\cite{18650cell}
 Lai gan fiziskie izmēri ir standartizēti, šūnām ar izvirzītu pozitīvo termināli var atšķirties izvirzījuma izmēri,
 līdz ar to tās var būt nesaderīgas ar ierīcēm.
 
-\subsubsection{Uzlāde}
+\subsubsection{Aizsargātas šūnas}
 
-Vienas šūnas uzlādei ir divi posmi - konstantas strāvas un konstanta sprieguma.
-Šie posmi veidojas no diviem šūnas parametriem - maksimālās uzlādes strāvas un maksimālā sprieguma.
+\FloatBarrier
+\newpage
+\section{\texorpdfstring{\MakeUppercase{Līdzīgas iekārtas}}{Līdzīgas iekārtas}}
 
-Uzlādējot vairākas virknē slēgtas šūnas vēl nepieciešams balansēt uzlādi starp šūnām, 
-jo tās var uzlādēties dažādos ātrumos atšķirīgu iekšējo pretestību dēļ.
-
-\subsubsection{Izlāde}
-
-\subsection{Līdzīgas iekārtas}
+\subsection{Industriālas iekārtas}
 
 \subsubsection{Eagle Eye}
 
-\subsubsection{PEC ACT0505}
+\subsubsection{PEC ACT0505} 
 
-ACT0505 
+\subsubsection{Amperis}
+
+\subsubsection{SBSBattery}
+
+\subsection{Hobija iekārtas}
 
 \subsubsection{SkyRC}
 
@@ -268,16 +315,12 @@ Ir konstantas strāvas un jaudas režīmi, USB savienojums ar Windows programmat
 \end{table}
 \endgroup
 
-\subsubsection{Amperis}
-
 \subsubsection{RCDischarger}
-
-\subsubsection{SBSBattery}
 
 \clearpage
 \section{\texorpdfstring{\MakeUppercase{Izstrādājamās sistēmas analīze}}{Izstrādājamās sistēmas analīze}}
 
-Šunu testēšanas sistēma sastāvēs no viena vadības moduļa un vairākiem testēšanas moduļiem.
+Šunu testēšanas sistēma sastāvēs no viena vadības moduļa un vairākiem tes\-tē\-šanas moduļiem.
 Vadības moduļa galvenās funckijas būs testa datu uzkrāšana un katras šūnas testa procesa vadība.
 Savukārt testēšanas modulis sastāves no mērīšanas, uzlādes un izlādes moduļiem. Mērīšanas moduļi mērīs baterijas parametrus (spriegumu, strāvu un temperatūru), kā arī pieslēgs vai atvienos uzlādes un izlādes moduļus no baterijas.
 Vadības modulis komunicēs ar mērīšanas moduļiem, kuri savukārt komunicēs ar attiecīgajiem uzlādes un izlādes moduļiem. 
@@ -289,49 +332,72 @@ I\textsuperscript{2}C komunikācija notiek starp vienu master un vienu slave ier
 I\textsuperscript{2}C nepieciešami tikai divi savienojumi (SCL un SDA), taču maksimālais komunikācijas ātrums ir ierobežots.
 SPI daisy-chain konfigurācijā komunikācija notiek bīdot informāciju caur visām virknē slēgtajās ierīcēm. Salīdzīnājumā ar I\textsuperscript{2}C, SPI nepieciešami trīs savienojumi (SCK, MOSI, MISO), taču maksimālais komunikācijas ātrums ir daudzreiz lielāks nekā I\textsuperscript{2}C.
 
+\subsection{Vadības modulis}
+
 \begin{figure}[h]
 	\centering
 	\begin{tikzpicture}
 		\node [block] (controller) {Vadības modulis};
-		
-		\node [block, right=of controller] (mea1) {Mērīšanas modulis};
-		\node [block, right=of mea1] (bat1) {Testējamā šūna};
-		\node [block, below=of bat1] (disc1) {Izlādes modulis};
-		\node [block, above=of bat1] (charge1) {Uzlādes modulis};
+		\node [io, above left=of controller] (input) {Konfigurācija};
+		\node [io, above right=of controller] (output) {Rezultāti};
+		\node [block, below left=of controller] (test1) {Testēšanas modulis 1};
+		\node [block, below=of controller] (test) {...};
+		\node [block, below right=of controller] (testn) {Testēšanas modulis n};		
 				
-		\draw [<->] (controller.east) -- (mea1.west);
-		\draw [<-] (mea1.east) -- (bat1.west);
-		\draw [->] (mea1.north) |- (charge1.west);
-		\draw [<->] (mea1.south) |- (disc1.west);
-		\draw [->] (bat1.south) -- (disc1.north);
-		\draw [<-] (bat1.north) -- (charge1.south);
-		
-		\node [
-			draw=black, 
-			dashed, 
-			inner sep=1em, 
-			fit= (mea1) (bat1) (disc1) (charge1)] (cont1) {};
-		\node [yshift=-1em] at (cont1.south) {Testēšanas modulis};
+		\draw [<-] (controller) -- (input);
+		\draw [->] (controller) -- (output);
+		\draw [<->] (controller.west) -| (test1.north);
+		\draw [<->] (controller.south) -- (test.north);
+		\draw [<->] (controller.east) -| (testn.north);
 	\end{tikzpicture}
-	\caption{Kopējas sistēmas blokshēma}
+	\caption{Testēšanas sistēma}
 \end{figure}
+
+Vadības modulim jānodrošina piekļuve izmantojot tīklu Ethernet.
+Tas saņems testa konfigurāciju, kurā būs norādīti tādi bateriju šūnu testēšanas parametri, kā uzlādes spriegums, izlādes spriegums un strāva un ciklu skaits.
+Testa gaitā vadības modulis nepieciešamajā laikā nodod komandas katram testēšanas modulim, kā arī periodiski saglabā mērījumu datus no testēšanas moduļiem.
+Testa beigas jabūt iespējamam no vadības moduļa saņemt visus testa gaitā iegūtos datus.
 
 \subsection{Mērīšanas modulis}
 
-Sprieguma diapazons $0.00-4.50\pm0.01 V$, strāvas diapazons $0.00-10.00\pm0.05 A$. Temperatūras sensors ar diapazonu $0.0-100.0\degree $. 
-Datu nolasīšana izmantojot I2C interfeisu.
-Barošanas spriegums $+12VDC$ un $+5VDC$. 
-Ar relejiem spēj atslēgs izlādes un uzlādes moduļus no šūnas.
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+		\node [block] (mea1) {Mērīšanas modulis};
+		\node [io, above left=of mea1] (input) {Komandas};
+		\node [io, above right=of mea1] (output) {Mērījumi, statuss};
+		\node [block, below=of mea1] (bat1) {Testējamā šūna};
+		\node [block, right=of bat1] (disc1) {Izlādes modulis};
+		\node [block, left=of bat1] (charge1) {Uzlādes modulis};
+		
+		\draw [<-] (mea1) -- (input);
+		\draw [->] (mea1) -- (output);
+		\draw [<-] (mea1.south) -- (bat1.north);
+		\draw [<->] (mea1.west) -| (charge1.north);
+		\draw [<->] (mea1.east) -| (disc1.north);
+		\draw [->] (bat1.east) -- (disc1.west);
+		\draw [<-] (bat1.west) -- (charge1.east);
+	\end{tikzpicture}
+	\caption{Testēšanas modulis}
+\end{figure}
+
+Mērīšanas modulis kontrolē katras šūnas uzlādes un izlādes sākšanu/beigšanu, kā arī mēra sekojošus šūnas parametrus:
+\begin{itemize}
+	\item spriegumu diapazonā $0.00-4.50\pm0.01 V$;
+	\item strāvu diapazonā $0.00-20.00\pm0.05 A$;
+	\item temperatūru diapazonā $0.0-100.0\pm0.1\degree C$.
+\end{itemize}
 
 \subsection{Izlādes modulis}
 
 Sākuma spriegums līdz $4.35V$, iestādāms beigu spriegums $2.50-4.35 V$.
 Maksimālā izlādes strāva $20(10) A$, jauda $80(40) W$.
 Sprieguma, strāvas un temperatūras vērtības tiks nolasītas no mērīšanas moduļa. 
+Releji, lai būtu iespējams fiziski atvienot izlādes moduli no baterijas tādejādi samazinot tā ietekmi uz mērījumim kamēr tas netiek izmantots.
 
 \subsection{Uzlādes modulis}
 
-Ieteicams izmantot IC. Vienas šūnas uzlādes IC ir paradzēti uzlādei no USB, tāpēc ieejas spriegums ir $+5VDC$. USB PD standartiem atbilstoši lādētājiem ir arī ieejas līdz $+22VDC$, bet tam nepieciešama papildu konfigurācija izmantojot USB D+/D-, I2C vai rezistorus.
+Ieteicams izmantot IC. Vienas šūnas uzlādes IC ir paradzēti uzlādei no USB, tāpēc ieejas spriegums ir $+5VDC$. USB PD standartiem atbilstoši lādētājiem ir arī ieejas līdz $+22VDC$, bet tam nepieciešama papildu konfigurācija izmantojot USB D+/D-, I2C vai rezistorus. Releji, lai būtu iespējams fiziski atvienot izlādes moduli no baterijas tādejādi samazinot tā ietekmi uz mērījumim kamēr tas netiek izmantots.
 
 Parametri:
 \begin{itemize}
@@ -339,21 +405,23 @@ Parametri:
 	\item Iestādāms maksimālais spriegums līdz $4.35 V$
 \end{itemize}
 
-\subsection{Vadības modulis}
-
-Vad
 
 \FloatBarrier
 \newpage
 \section{\texorpdfstring{\MakeUppercase{Sistēmas izstrāde}}{Sistēmas izstrāde}}
 
+\subsection{Vadības modulis}
+
+\subsection{Mērīšanas modulis}
+
 \subsection{Izlādes modulis}
 
 \subsection{Uzlādes modulis}
 
-\subsection{Vadības modulis}
+\FloatBarrier
+\newpage
+\section{\texorpdfstring{\MakeUppercase{Ierīces specifikācija un\newline ietekmes uz vidi novērtējums}}{Ierīces specifikācija un ietekmes uz vidi novērtējums}}
 
-\subsection{Kopējā sistēma}
 
 \FloatBarrier
 \newpage
